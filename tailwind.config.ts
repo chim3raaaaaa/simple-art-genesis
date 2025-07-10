@@ -61,6 +61,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				'lab-sidebar': {
+					bg: 'hsl(var(--sidebar-bg))',
+					text: 'hsl(var(--sidebar-text))',
+					active: 'hsl(var(--sidebar-active))',
+					hover: 'hsl(var(--sidebar-hover))'
+				},
+				'lab-table': {
+					header: 'hsl(var(--table-header))',
+					'row-even': 'hsl(var(--table-row-even))',
+					'row-odd': 'hsl(var(--table-row-odd))'
+				},
+				'lab-status': {
+					pending: 'hsl(var(--status-pending))',
+					complete: 'hsl(var(--status-complete))',
+					unknown: 'hsl(var(--status-unknown))'
 				}
 			},
 			borderRadius: {
