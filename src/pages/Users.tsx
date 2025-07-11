@@ -55,8 +55,10 @@ const roles = [
 ];
 
 export default function Users() {
+  console.log("Users component is rendering");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("users");
+  console.log("Users component state initialized");
 
   const filteredUsers = users.filter(user => 
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

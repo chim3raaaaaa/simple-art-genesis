@@ -5,6 +5,7 @@ interface LabLayoutProps {
 }
 
 export function LabLayout({ children }: LabLayoutProps) {
+  console.log("LabLayout rendering with children:", !!children);
   return (
     <div className="flex h-screen bg-background">
       <LabSidebar />
