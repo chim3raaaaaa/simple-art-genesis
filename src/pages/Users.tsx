@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Search, Plus, Users, Shield, UserCheck, Settings } from "lucide-react";
+import { Search, Plus, Users as UsersIcon, Shield, UserCheck, Settings } from "lucide-react";
 import { useState } from "react";
 
 const users = [
@@ -54,7 +54,7 @@ const roles = [
   { name: "Admin", permissions: ["User Management", "System Configuration"], users: 1 }
 ];
 
-export default function UsersPage() {
+export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("users");
 
@@ -104,7 +104,7 @@ export default function UsersPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <UsersIcon className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{users.length}</div>
