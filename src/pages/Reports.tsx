@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Search, Plus, Download, FileText, Calendar, Eye, Share } from "lucide-react";
-import { EmailComposer } from "@/components/lab/EmailComposer";
 import { useState } from "react";
 
 const reports = [
@@ -47,10 +46,7 @@ const templates = [
   { name: "Batch Summary", description: "Summary of all tests in a batch", category: "Summary" },
   { name: "Quality Control Report", description: "QC analysis and recommendations", category: "Quality" },
   { name: "Monthly Analytics", description: "Monthly performance and statistics", category: "Analytics" },
-  { name: "Compliance Report", description: "Regulatory compliance summary", category: "Compliance" },
-  { name: "Site Inspection Report", description: "On-site inspection and testing results", category: "Inspection" },
-  { name: "Material Certification", description: "Material compliance certification", category: "Certification" },
-  { name: "Aggregate Analysis", description: "Comprehensive aggregate testing report", category: "Analysis" }
+  { name: "Compliance Report", description: "Regulatory compliance summary", category: "Compliance" }
 ];
 
 const certificates = [
@@ -90,10 +86,6 @@ export default function Reports() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [activeTab, setActiveTab] = useState("reports");
-  const [emailComposer, setEmailComposer] = useState({
-    isOpen: false,
-    reportData: null as any
-  });
 
   const filteredReports = reports.filter(report => {
     const matchesSearch = report.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -121,20 +113,6 @@ export default function Reports() {
       case 'analysis': return 'bg-orange-500/20 text-orange-700 border-orange-500/30';
       default: return 'bg-gray-500/20 text-gray-700 border-gray-500/30';
     }
-  };
-
-  const openEmailComposer = (report: any) => {
-    setEmailComposer({
-      isOpen: true,
-      reportData: report
-    });
-  };
-
-  const closeEmailComposer = () => {
-    setEmailComposer({
-      isOpen: false,
-      reportData: null
-    });
   };
 
   return (
@@ -293,14 +271,6 @@ export default function Reports() {
                             <Download className="h-3 w-3 mr-1" />
                             Download
                           </Button>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => openEmailComposer(report)}
-                          >
-                            <Share className="h-3 w-3 mr-1" />
-                            Email
-                          </Button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -385,10 +355,6 @@ export default function Reports() {
                       <Button variant="outline" size="sm">
                         Use Template
                       </Button>
-                      <Button variant="outline" size="sm">
-                        <Plus className="h-3 w-3 mr-1" />
-                        Generate
-                      </Button>
                     </div>
                   </div>
                 ))}
@@ -396,12 +362,6 @@ export default function Reports() {
             </CardContent>
           </Card>
         )}
-
-        <EmailComposer
-          isOpen={emailComposer.isOpen}
-          onClose={closeEmailComposer}
-          reportData={emailComposer.reportData}
-        />
       </div>
     </LabLayout>
   );
