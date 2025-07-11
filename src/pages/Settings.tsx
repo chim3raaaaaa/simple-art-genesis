@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Settings, Bell, Database, Shield, Mail, Globe, Palette, Save } from "lucide-react";
+import { DatabaseConnections } from "@/components/lab/DatabaseConnections";
+import { EmailPresets } from "@/components/lab/EmailPresets";
 import { useState } from "react";
 
 export default function SettingsPage() {
@@ -22,10 +24,10 @@ export default function SettingsPage() {
 
   const tabs = [
     { id: "general", label: "General", icon: Settings },
+    { id: "database", label: "Database Connections", icon: Database },
+    { id: "email-presets", label: "Email Presets", icon: Mail },
     { id: "notifications", label: "Notifications", icon: Bell },
-    { id: "database", label: "Database", icon: Database },
     { id: "security", label: "Security", icon: Shield },
-    { id: "integrations", label: "Integrations", icon: Mail }
   ];
 
   return (
@@ -160,6 +162,10 @@ export default function SettingsPage() {
               </div>
             )}
 
+            {activeTab === "database" && <DatabaseConnections />}
+
+            {activeTab === "email-presets" && <EmailPresets />}
+
             {activeTab === "notifications" && (
               <Card>
                 <CardHeader>
@@ -229,64 +235,6 @@ export default function SettingsPage() {
               </Card>
             )}
 
-            {activeTab === "database" && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Database Configuration</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="dbHost">Database Host</Label>
-                      <Input id="dbHost" defaultValue="localhost" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="dbPort">Port</Label>
-                      <Input id="dbPort" defaultValue="5432" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="dbName">Database Name</Label>
-                    <Input id="dbName" defaultValue="ubp_lab_db" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="backupFreq">Backup Frequency</Label>
-                      <Select defaultValue="daily">
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="hourly">Hourly</SelectItem>
-                          <SelectItem value="daily">Daily</SelectItem>
-                          <SelectItem value="weekly">Weekly</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="retention">Retention Period</Label>
-                      <Select defaultValue="30days">
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="7days">7 Days</SelectItem>
-                          <SelectItem value="30days">30 Days</SelectItem>
-                          <SelectItem value="90days">90 Days</SelectItem>
-                          <SelectItem value="1year">1 Year</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  <div className="flex space-x-2 pt-4">
-                    <Button variant="outline">Test Connection</Button>
-                    <Button variant="outline">Backup Now</Button>
-                    <Button variant="outline">View Logs</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
             {activeTab === "security" && (
               <div className="space-y-6">
                 <Card>
@@ -346,70 +294,6 @@ export default function SettingsPage() {
                   </CardContent>
                 </Card>
               </div>
-            )}
-
-            {activeTab === "integrations" && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>SMTP Integration</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="smtpHost">SMTP Host</Label>
-                      <Input id="smtpHost" placeholder="smtp.gmail.com" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="smtpPort">Port</Label>
-                      <Input id="smtpPort" defaultValue="587" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="smtpUser">Username</Label>
-                      <Input id="smtpUser" placeholder="your-email@domain.com" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="smtpPass">Password</Label>
-                      <Input id="smtpPass" type="password" placeholder="••••••••" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="fromEmail">From Email</Label>
-                    <Input id="fromEmail" defaultValue="noreply@ubpmauritius.com" />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <Label>Use SSL/TLS</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Enable secure connection
-                      </p>
-                    </div>
-                    <Switch defaultChecked />
-                  </div>
-                  <div className="flex space-x-2 pt-4">
-                    <Button variant="outline">Test Connection</Button>
-                    <Button variant="outline">Send Test Email</Button>
-                  </div>
-                  <div className="mt-6">
-                    <h4 className="font-medium mb-3">Integration Status</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <span>Email Notifications</span>
-                        <Badge className="bg-green-500/20 text-green-700 border-green-500/30">
-                          Connected
-                        </Badge>
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <span>Report Delivery</span>
-                        <Badge className="bg-green-500/20 text-green-700 border-green-500/30">
-                          Active
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             )}
           </div>
         </div>

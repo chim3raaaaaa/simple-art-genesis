@@ -1,4 +1,6 @@
 import { LabLayout } from "@/components/lab/LabLayout";
+import { WelcomeHeader } from "@/components/lab/WelcomeHeader";
+import { ConnectionStatus } from "@/components/lab/ConnectionStatus";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
 
@@ -30,10 +32,11 @@ const Dashboard = () => {
   return (
     <LabLayout>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+        <WelcomeHeader className="mb-6" />
         
         {/* Key Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+          <ConnectionStatus />
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Active Memos</CardTitle>
