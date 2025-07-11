@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ChevronDown, ChevronRight, Folder, FolderOpen } from "lucide-react";
+import { ChevronDown, ChevronRight, Folder, FolderOpen, Download, Upload, Printer } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface BatchData {
   batchNo: string;
@@ -99,7 +100,7 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-export function BatchManagement() {
+export function MemoManagement() {
   const [expandedNodes, setExpandedNodes] = useState<Record<string, boolean>>({
     traich: true,
     curepipe: true,
@@ -113,9 +114,37 @@ export function BatchManagement() {
     }));
   };
 
+  const handleImport = () => {
+    console.log("Import functionality");
+  };
+
+  const handleExport = () => {
+    console.log("Export functionality");
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Batch Management</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Memo Management</h1>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={handleImport}>
+            <Upload className="h-4 w-4 mr-2" />
+            Import
+          </Button>
+          <Button variant="outline" onClick={handleExport}>
+            <Download className="h-4 w-4 mr-2" />
+            Export
+          </Button>
+          <Button variant="outline" onClick={handlePrint}>
+            <Printer className="h-4 w-4 mr-2" />
+            Print
+          </Button>
+        </div>
+      </div>
       
       {/* Header Info */}
       <div className="bg-card border rounded-lg p-4 mb-6">

@@ -49,6 +49,39 @@ const templates = [
   { name: "Compliance Report", description: "Regulatory compliance summary", category: "Compliance" }
 ];
 
+const certificates = [
+  {
+    id: "CERT-2024-001",
+    name: "Aggregate Compliance Certificate",
+    standard: "BS EN 12620",
+    issuedTo: "ABC Construction Ltd",
+    dateIssued: "2024-01-15",
+    validUntil: "2024-07-15",
+    status: "Valid",
+    batchRef: "BC-3201"
+  },
+  {
+    id: "CERT-2024-002", 
+    name: "Concrete Block Certificate",
+    standard: "BS EN 771-3",
+    issuedTo: "DEF Builders",
+    dateIssued: "2024-01-12",
+    validUntil: "2024-07-12",
+    status: "Valid",
+    batchRef: "BC-3203"
+  },
+  {
+    id: "CERT-2024-003",
+    name: "Paving Stone Certificate",
+    standard: "BS EN 1338",
+    issuedTo: "GHI Infrastructure",
+    dateIssued: "2024-01-10",
+    validUntil: "2024-07-10", 
+    status: "Expired",
+    batchRef: "BC-3205"
+  }
+];
+
 export default function Reports() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -86,12 +119,12 @@ export default function Reports() {
     <LabLayout>
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Reports</h1>
-            <p className="text-muted-foreground">
-              Generate and manage laboratory reports
-            </p>
-          </div>
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Generate Reports</h1>
+          <p className="text-muted-foreground">
+            Generate and manage laboratory reports and compliance certificates
+          </p>
+        </div>
           <Button>
             <Plus className="h-4 w-4 mr-2" />
             Generate Report
@@ -151,6 +184,12 @@ export default function Reports() {
               onClick={() => setActiveTab("reports")}
             >
               Reports
+            </Button>
+            <Button 
+              variant={activeTab === "certificates" ? "default" : "outline"}
+              onClick={() => setActiveTab("certificates")}
+            >
+              Compliance Certificates
             </Button>
             <Button 
               variant={activeTab === "templates" ? "default" : "outline"}
@@ -222,6 +261,59 @@ export default function Reports() {
                       </TableCell>
                       <TableCell>{report.format}</TableCell>
                       <TableCell>{report.size}</TableCell>
+                      <TableCell>
+                        <div className="flex space-x-2">
+                          <Button variant="outline" size="sm">
+                            <Eye className="h-3 w-3 mr-1" />
+                            View
+                          </Button>
+                          <Button variant="outline" size="sm">
+                            <Download className="h-3 w-3 mr-1" />
+                            Download
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        ) : activeTab === "certificates" ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Compliance Certificates</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Certificate ID</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Standard</TableHead>
+                    <TableHead>Issued To</TableHead>
+                    <TableHead>Date Issued</TableHead>
+                    <TableHead>Valid Until</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Batch Ref</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {certificates.map((cert) => (
+                    <TableRow key={cert.id}>
+                      <TableCell className="font-medium">{cert.id}</TableCell>
+                      <TableCell>{cert.name}</TableCell>
+                      <TableCell>{cert.standard}</TableCell>
+                      <TableCell>{cert.issuedTo}</TableCell>
+                      <TableCell>{cert.dateIssued}</TableCell>
+                      <TableCell>{cert.validUntil}</TableCell>
+                      <TableCell>
+                        <Badge className={cert.status === "Valid" ? "bg-green-500/20 text-green-700 border-green-500/30" : "bg-red-500/20 text-red-700 border-red-500/30"}>
+                          {cert.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>{cert.batchRef}</TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
                           <Button variant="outline" size="sm">

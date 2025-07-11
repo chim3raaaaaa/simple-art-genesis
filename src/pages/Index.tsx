@@ -1,10 +1,10 @@
 import { LabLayout } from "@/components/lab/LabLayout";
-import { BatchManagement } from "@/components/lab/BatchManagement";
+import { MemoManagement } from "@/components/lab/MemoManagement";
 
 const Index = () => {
   return (
     <LabLayout>
-      <BatchManagement />
+      <MemoManagement />
     </LabLayout>
   );
 };

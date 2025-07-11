@@ -18,11 +18,11 @@ import { cn } from "@/lib/utils";
 const sidebarItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Bell, label: "Notifications", path: "/notifications" },
-  { icon: Package, label: "Batch Management", path: "/" },
+  { icon: Package, label: "Memo Management", path: "/" },
   { icon: FileText, label: "Test Requests", path: "/test-requests" },
   { icon: Grid3x3, label: "Test Modules", path: "/test-modules" },
   { icon: FileBarChart, label: "Report Designer", path: "/report-designer" },
-  { icon: BarChart3, label: "Reports", path: "/reports" },
+  { icon: BarChart3, label: "Generate Reports", path: "/reports" },
   { icon: Users, label: "User & Roles", path: "/users" },
   { icon: Zap, label: "SMTP Integrations", path: "/integrations" },
   { icon: TrendingUp, label: "Analytics", path: "/analytics" },
