@@ -136,19 +136,19 @@ export function DatabaseConnections() {
 
     switch (azurMindConfig.connectionType) {
       case 'api':
-        success = azurMindConfig.api.url && azurMindConfig.api.apiKey;
+        success = !!(azurMindConfig.api.url && azurMindConfig.api.apiKey);
         message = success ? 'API connection successful!' : 'Invalid API URL or key';
         break;
       case 'database':
-        success = azurMindConfig.database.server && azurMindConfig.database.database;
+        success = !!(azurMindConfig.database.server && azurMindConfig.database.database);
         message = success ? 'Database connection successful!' : 'Invalid database credentials';
         break;
       case 'file':
-        success = azurMindConfig.fileTransfer.host && azurMindConfig.fileTransfer.path;
+        success = !!(azurMindConfig.fileTransfer.host && azurMindConfig.fileTransfer.path);
         message = success ? 'File transfer connection successful!' : 'Invalid FTP/file settings';
         break;
       case 'webservice':
-        success = azurMindConfig.webService.wsdlUrl && azurMindConfig.webService.endpoint;
+        success = !!(azurMindConfig.webService.wsdlUrl && azurMindConfig.webService.endpoint);
         message = success ? 'Web service connection successful!' : 'Invalid web service configuration';
         break;
     }
@@ -166,9 +166,9 @@ export function DatabaseConnections() {
     
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    const success = sharePointConfig.siteUrl && 
+    const success = !!(sharePointConfig.siteUrl && 
       ((sharePointConfig.authType === 'basic' && sharePointConfig.username && sharePointConfig.password) ||
-       (sharePointConfig.authType === 'oauth' && sharePointConfig.clientId && sharePointConfig.clientSecret));
+       (sharePointConfig.authType === 'oauth' && sharePointConfig.clientId && sharePointConfig.clientSecret)));
     
     setTestResults(prev => ({
       ...prev,
